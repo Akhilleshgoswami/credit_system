@@ -7,8 +7,11 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 // import { getProvider } from './contracts/loadContract';
 // import MenuIcon from '@mui/icons-material/Menu';
-
+import { useContext } from 'react';
+import { setstate } from './context/contextapi';
+import Web3 from 'web3';
 export default function Navbar() {
+  const { contract, account,setaccount } = React.useContext(setstate);
   const connectToMetaMask = async () => {
     // Modern dapp browsers like MetaMask inject their own web3 instance
     if (window.ethereum) {
@@ -22,6 +25,7 @@ export default function Navbar() {
         // Do something with the web3 instance, such as fetching the user's account address
         const accounts = await web3.eth.getAccounts();
         console.log('Connected to MetaMask. Account:', accounts[0]);
+        setaccount(accounts[0]);
         
         // Add additional logic here, such as interacting with smart contracts
         
@@ -32,7 +36,10 @@ export default function Navbar() {
       console.error('Please install MetaMask to use this feature.');
     }
   };
-  
+  const disconnectToMetaMask = ()=>{
+    setaccount(undefined);
+  }
+  console.log(account)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -49,7 +56,10 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
            Chain Credit System 
           </Typography>
-          <Button color="inherit" onClick={connectToMetaMask}>Connect</Button>
+          {
+            account !== undefined  ?   <Button color="inherit" onClick={disconnectToMetaMask}> {account.slice(1,10)}... disConnect</Button> : <Button color="inherit" onClick={connectToMetaMask}>Connect</Button>
+          }
+          
         </Toolbar>
       </AppBar>
     </Box>
