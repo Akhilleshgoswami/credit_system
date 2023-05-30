@@ -5,13 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+
 // import { getProvider } from './contracts/loadContract';
 // import MenuIcon from '@mui/icons-material/Menu';
 import { useContext } from 'react';
-import { setstate } from './context/contextapi';
+import { setstate } from '../context/contextapi';
 import Web3 from 'web3';
 export default function Navbar() {
   const { contract, account,setaccount } = React.useContext(setstate);
+ 
   const connectToMetaMask = async () => {
     // Modern dapp browsers like MetaMask inject their own web3 instance
     if (window.ethereum) {
@@ -36,6 +38,17 @@ export default function Navbar() {
       console.error('Please install MetaMask to use this feature.');
     }
   };
+    if(window.ethereum){
+      window.ethereum.on("accountsChanged", function (accounts) {
+        // Time to reload your interface with accounts[0]!
+        window.location.reload();
+      })
+    }
+
+
+
+
+
   const disconnectToMetaMask = ()=>{
     setaccount(undefined);
   }

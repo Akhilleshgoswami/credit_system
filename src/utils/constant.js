@@ -1,0 +1,2 @@
+export const CONTRACT_ADDRESS = "0xf5B4F8d58Cc3Af2e36B016b49ec45A328A5618c4"
+export const CHAIN_ID = ""
