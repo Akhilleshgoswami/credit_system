@@ -135,11 +135,6 @@
                     "internalType": "address",
                     "name": "to_",
                     "type": "address"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "amount_",
-                    "type": "uint256"
                 }
             ],
             "name": "mint",

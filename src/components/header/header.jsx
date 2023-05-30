@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import { useContext } from 'react';
 import { setstate } from '../context/contextapi';
 import Web3 from 'web3';
+import { getAccount } from '../../utils/utils';
 export default function Navbar() {
   const { contract, account,setaccount } = React.useContext(setstate);
  
@@ -38,10 +39,13 @@ export default function Navbar() {
       console.error('Please install MetaMask to use this feature.');
     }
   };
+  const setaccounts = async()=>{
+    setaccount(await getAccount())
+  }
     if(window.ethereum){
       window.ethereum.on("accountsChanged", function (accounts) {
         // Time to reload your interface with accounts[0]!
-        window.location.reload();
+        setaccounts()
       })
     }
 

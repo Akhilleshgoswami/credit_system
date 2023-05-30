@@ -1,7 +1,7 @@
 import abi from "./contract_abi";
 import ercabi from "./erc20_abi";
 import Web3 from "web3";
-
+import {CONTRACT_ADDRESS, CREDIT_TOKEN} from '../../utils/constant'
 const getProvider = async () => {
     if (window.ethereum) {
       const ethereum = window.ethereum;
@@ -17,9 +17,9 @@ const getProvider = async () => {
 
 const loadContracts = async () => {
     const web3 = new Web3(await getProvider());
-    const contractInstance = await new web3.eth.Contract(
+    const contractInstance =  new web3.eth.Contract(
         abi.abi,
-        "0xf5B4F8d58Cc3Af2e36B016b49ec45A328A5618c4"
+        CONTRACT_ADDRESS
     );
     console.log(contractInstance);
     return contractInstance
@@ -27,11 +27,11 @@ const loadContracts = async () => {
 };
 const loadErc20 = async()=>{
   const web3 = new Web3(await getProvider());
-  const contractInstance = await new web3.eth.Contract(
+  const contractInstance =  new web3.eth.Contract(
     ercabi.abi,
-      "0xd6900Eb414A51Cec95b42D09f84Cf8799C3D5A26"
+    CREDIT_TOKEN
   );
-  console.log(contractInstance);
+  console.log("my contract",contractInstance)
   return contractInstance
 
 }

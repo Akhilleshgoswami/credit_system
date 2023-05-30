@@ -5,7 +5,8 @@ import Navbar from './components/header/header';
 import { setstate } from './components/context/contextapi';
 import {loadContracts} from "./components/contracts/loadContract"
 import MainPage from './components/MainPage/Page';
-import {getAccount,getChainId} from "./utils/utils.js"
+import {getChainId} from "./utils/utils.js"
+import { CHAIN_ID } from './utils/constant';
 function App() {
   const [contractInstance, setcontract] = useState();
   const [account, setaccount] = useState()
@@ -37,7 +38,7 @@ function App() {
   window.ethereum.on('chainChanged', ()=>{
     window.location.reload();
   });
-  if(chainId !== 80001){
+  if(chainId !== CHAIN_ID){
     return (<div> 
     <h4>Your are on wrong network please switch to polygon mumbai</h4>
   </div>)
